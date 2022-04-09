@@ -5,7 +5,7 @@ import './css/styles.css'
 
 const axios = require('axios');
 const form = document.querySelector('.search-form');
-//const searchButton = document.querySelector('button');
+
 const loadMoreButton = document.querySelector('.load-more');
 const buttonHideText = document.querySelector('.button-hide-text');
 const gallery = document.querySelector(".gallery");
@@ -26,16 +26,6 @@ loadMoreButton.addEventListener("click", loadMore);
 loadMoreButton.style.display='none';
 buttonHideText.style.visibility='hidden';
   
-
-
-// searchButton.addEventListener("click", async () => {
-//   try {
-//     const elements = await getUser();
-//     //renderUserListItems(elements);
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// });
 
 
 async function getUser(event) {
@@ -215,26 +205,7 @@ if (elements.length > 0)
     
   }
   
-
-
-  
 }
 
 
-
-//getUser();
-
-// function renderUserListItems(elements) {
-//   const markup = elements
-//     .map(
-    
-//     (elem) => `<ul class="item">
-//         <p><b>Name</b>: ${elem.id}</p>
-//         <p><b>Email</b>: ${elem.tags}</p>
-//         <p><b>Company</b>: ${elem.likes}</p>
-//       </ul>`
-//     )
-//     .join("");
-//   userList.innerHTML = markup;
-// }
 
