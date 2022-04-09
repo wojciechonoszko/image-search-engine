@@ -1,6 +1,7 @@
 import Notiflix from 'notiflix';
-
-
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import './css/styles.css'
 
 const axios = require('axios');
 const form = document.querySelector('.search-form');
@@ -78,36 +79,39 @@ async function getUser(event) {
   //   console.log(response.data.hits[0].downloads);
 
 if (elements.length > 0)
-       {Notiflix.Notify.success(`Found ${totalFound} matches`);
+       {Notiflix.Notify.success(`Hooray! We found ${totalFound} images.`);
          
         const markup = elements
            .map(
            
           
            (elem) => `<div class="photo-card">
-           <img src="${elem.webformatURL}" alt="${elem.tags}" loading="lazy" />
+           <a href="${elem.largeImageURL}"><img src="${elem.webformatURL}" alt="${elem.tags}" loading="lazy" /></a>
            <div class="info">
              <p class="info-item">
-               <b>Likes</b>: ${elem.likes} 
+               <b>Likes</b> ${elem.likes}
              </p>
              <p class="info-item">
-               <b>Views</b>: ${elem.views}
+               <b>Views</b> ${elem.views}
              </p>
              <p class="info-item">
-               <b>Comments</b>: ${elem.comments}
+               <b>Comments</b> ${elem.comments}
              </p>
              <p class="info-item">
-               <b>Downloads</b>: ${elem.downloads}
+               <b>Downloads</b> ${elem.downloads}
              </p>
            </div>
          </div>`
            )
            .join("");
+           
          gallery.innerHTML = markup;}
+         
     else {
       console.log("Nic nie znaleziono");
       Notiflix.Notify.failure('"Sorry, there are no images matching your search query. Please try again."');
     }
+    
 
     
 
@@ -119,6 +123,7 @@ if (elements.length > 0)
     console.error(error);
     
   }
+  
   loadMoreButton.style.display='block';
 }
 
@@ -159,37 +164,40 @@ async function loadMore(event) {
      console.log(response.data.total);
   
 if (elements.length > 0)
-       {Notiflix.Notify.success(`Found ${totalFound} matches`);
+       {//Notiflix.Notify.success(`Found ${totalFound} matches`);
          
         const markup = elements
            .map(
            
           
            (elem) => `<div class="photo-card">
-           <img src="${elem.webformatURL}" alt="${elem.tags}" loading="lazy" />
+           <a href="${elem.largeImageURL}"><img src="${elem.webformatURL}" alt="${elem.tags}" loading="lazy" /></a>
            <div class="info">
              <p class="info-item">
-               <b>Likes</b>: ${elem.likes} 
+               <b>Likes</b> ${elem.likes} 
              </p>
              <p class="info-item">
-               <b>Views</b>: ${elem.views}
+               <b>Views</b> ${elem.views}
              </p>
              <p class="info-item">
-               <b>Comments</b>: ${elem.comments}
+               <b>Comments</b> ${elem.comments}
              </p>
              <p class="info-item">
-               <b>Downloads</b>: ${elem.downloads}
+               <b>Downloads</b> ${elem.downloads}
              </p>
            </div>
          </div>`
            )
            .join("");
          //gallery.innerHTML = markup;
+
         gallery.insertAdjacentHTML('beforeend', markup)}
+        
     else {
       console.log("Nic nie znaleziono");
       Notiflix.Notify.failure('"Sorry, there are no images matching your search query. Please try again."');
     }
+    
     loadMoreButton.style.display='block';
     console.log("page " + page);
     console.log("limit " + limit*page);
